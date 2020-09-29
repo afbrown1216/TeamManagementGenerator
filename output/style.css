@@ -1,0 +1,25 @@
+.jumbotron{
+    background-color: darkseagreen;
+    color: darkslateblue;
+    font-size: 50px;
+}
+
+.card-header{
+    background-color: darkseagreen;
+    color: indigo;
+    font-weight: bold;
+    
+}
+.card{
+    border-color: lightblue;
+    marigin-left: 
+}
+
+.card-body{
+    background-color: gainsboro;
+}
+
+.list-group{
+    background-color: ghostwhite;
+    color: darkblue;
+}
