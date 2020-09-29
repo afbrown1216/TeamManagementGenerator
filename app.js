@@ -108,7 +108,7 @@ internQuestions = [
     },
     {
         type:"input",
-        message:"What school is itern from?",
+        message:"What school does intern attend?",
         name: "school"
     }
 ];
@@ -119,7 +119,7 @@ function startTeamProfile (){
 .prompt(firstQuestion)
 .then(function(res){
     console.log(res)
-    if(res.teamMember === "Manager"){
+    if(res.teamMember === "Manager" ){
        createManagerProfile();
     } else if (res.teamMember === "Engineer"){
         createEngineerProfile();
@@ -127,10 +127,10 @@ function startTeamProfile (){
         createInternProfile();
     } else {
         makeTeam();
-
     }
 })
 }
+
 
 startTeamProfile();
 // After the user has input all employees desired, call the `render` function (required
@@ -140,26 +140,32 @@ startTeamProfile();
 function makeTeam (){
     fs.writeFileSync(outputPath, render(team), "utf-8");
 }
-
+var manCount = 0;
 function createManagerProfile(){
-    inquirer.prompt(managerQuestions).then(function (res){
-        let bob = new Manager(res.name, res.id, res.email, res.officeNumber)
-         console.log(bob);
-         team.push(bob);
-         startTeamProfile();
-
-          
-     }).catch((err)=> {
-         console.log(err)
-     });
-     
+    if(manCount === 0 ){
+        inquirer.prompt(managerQuestions).then(function (res){
+            let bob = new Manager(res.name, res.id, res.email, res.officeNumber)
+            //  console.log(bob);
+             team.push(bob);
+             startTeamProfile();
+    
+              
+         }).catch((err)=> {
+             console.log(err)
+         });
+    } else {
+        console.log("Manager has already been created pick an Engineer or Intern")
+        startTeamProfile();
+    }
+   
+     manCount++
     
 }
 
 function createEngineerProfile(){
     inquirer.prompt(engineerQuestions).then(function (res){
         let john = new Engineer(res.name, res.id, res.email, res.github)
-            console.log(john);
+            // console.log(john);
             team.push(john);
             startTeamProfile();
         
@@ -173,7 +179,7 @@ function createEngineerProfile(){
 function createInternProfile(){
     inquirer.prompt(internQuestions).then(function (res){
         let jan = new Intern(res.name, res.id, res.email, res.school)
-            console.log(jan);
+            // console.log(jan);
             team.push(jan);
             startTeamProfile();
     }).catch((err)=> {
