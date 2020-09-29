@@ -10,6 +10,7 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
+const team = [];
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
@@ -112,42 +113,76 @@ internQuestions = [
     }
 ];
 
-function startProfile (){
+function startTeamProfile (){
+    console.log("Build your team")
     inquirer
 .prompt(firstQuestion)
 .then(function(res){
     console.log(res)
     if(res.teamMember === "Manager"){
-        inquirer.prompt(managerQuestions).then(function (res){
-           let bob = new Manager(res.name, res.id, res.email, res.officeNumber)
-            console.log(bob);
-             
-        }).catch((err)=> {
-            console.log(err)
-        })  
+       createManagerProfile();
     } else if (res.teamMember === "Engineer"){
-        inquirer.prompt(engineerQuestions).then(function (res){
-            let john = new Engineer(res.name, res.id, res.email, res.github)
-                console.log(john);
-            
-        }).catch((err)=> {
-            console.log(err)
-        }) 
+        createEngineerProfile();
     } else if (res.teamMember === "Intern"){
-        inquirer.prompt(internQuestions).then(function (res){
-            let jan = new Intern(res.name, res.id, res.email, res.school)
-                console.log(jan);
-        }).catch((err)=> {
-            console.log(err)
-        }) 
+        createInternProfile();
+    } else {
+        makeTeam();
+
     }
 })
 }
 
-startProfile();
+startTeamProfile();
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
+
+function makeTeam (){
+    fs.writeFileSync(outputPath, render(team), "utf-8");
+}
+
+function createManagerProfile(){
+    inquirer.prompt(managerQuestions).then(function (res){
+        let bob = new Manager(res.name, res.id, res.email, res.officeNumber)
+         console.log(bob);
+         team.push(bob);
+         startTeamProfile();
+
+          
+     }).catch((err)=> {
+         console.log(err)
+     });
+     
+    
+}
+
+function createEngineerProfile(){
+    inquirer.prompt(engineerQuestions).then(function (res){
+        let john = new Engineer(res.name, res.id, res.email, res.github)
+            console.log(john);
+            team.push(john);
+            startTeamProfile();
+        
+    }).catch((err)=> {
+        console.log(err)
+    });
+
+    
+}
+
+function createInternProfile(){
+    inquirer.prompt(internQuestions).then(function (res){
+        let jan = new Intern(res.name, res.id, res.email, res.school)
+            console.log(jan);
+            team.push(jan);
+            startTeamProfile();
+    }).catch((err)=> {
+        console.log(err)
+    });
+
+    
+}
+
 
 // After you have your html, you're now ready to create an HTML file using the HTML
 // returned from the `render` function. Now write it to a file named `team.html` in the
