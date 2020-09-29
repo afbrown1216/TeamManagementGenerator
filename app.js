@@ -15,9 +15,10 @@ const render = require("./lib/htmlRenderer");
 // and to create objects for each team member (using the correct classes as blueprints!)
 
 firstQuestion = [{
-    type:"input",
-    message:"",
-    name: ""
+    type:"list",
+    message:"What team member would you like to add?",
+    choices: ["Manager", "Engineer", "Intern", "None"],
+    name: "teamMember"
 }]
 
 managerQuestions = [
@@ -84,7 +85,7 @@ managerQuestions = [
     {
         type:"input",
         message:"What is your office number?",
-        name: ""
+        name: "officeNumber"
     }
 ];
 
@@ -111,9 +112,36 @@ internQuestions = [
     }
 ];
 
+function startProfile (){
+    inquirer
+.prompt(firstQuestion)
+.then(function(res){
+    console.log(res)
+    if(res.teamMember === "Manager"){
+        inquirer.prompt(managerQuestions).then(function (res){
+            Bob = new Manager(res.name, res.id, res.email, res.officeNumber)
+            console.log(Bob);
+             
+        }).catch((err)=> {
+            console.log(err)
+        })  
+    } else if (res.teamMember === "Engineer"){
+        inquirer.prompt(engineerQuestions).then(function (res){
+            return new Engineer(res.name, res.id, res.email, res.github)
+        }).catch((err)=> {
+            console.log(err)
+        }) 
+    } else if (res.teamMember === "Intern"){
+        inquirer.prompt(internQuestions).then(function (res){
+            return new Intern(res.name, res.id, res.email, res.school)
+        }).catch((err)=> {
+            console.log(err)
+        }) 
+    }
+})
+}
 
-
-
+startProfile();
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
