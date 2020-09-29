@@ -39,9 +39,80 @@ managerQuestions = [
     {
         type:"input",
         message:"What is your office number?",
+        name: "officeNumber"
+    }
+];
+
+engineerQuestions = [
+    {
+        type:"input",
+        message:"What is the engineer's name?",
+        name: "name"
+    },
+    {
+        type:"input",
+        message:"What is engineers ID number?",
+        name: "id"
+    },
+    {
+        type:"input",
+        message:"What is engineers email?",
+        name: "email"
+    },
+    {
+        type:"input",
+        message:"What is the engineers GitHub username?",
+        name: "github"
+    }
+];
+managerQuestions = [
+    {
+        type:"input",
+        message:"What is your name?",
+        name: "name"
+    },
+    {
+        type:"input",
+        message:"What is your ID number?",
+        name: "id"
+    },
+    {
+        type:"input",
+        message:"What is your email?",
+        name: "email"
+    },
+    {
+        type:"input",
+        message:"What is your office number?",
         name: ""
     }
-]
+];
+
+internQuestions = [
+    {
+        type:"input",
+        message:"What is intern's name?",
+        name: "name"
+    },
+    {
+        type:"input",
+        message:"What is intern's ID number?",
+        name: "id"
+    },
+    {
+        type:"input",
+        message:"What is intern's email?",
+        name: "email"
+    },
+    {
+        type:"input",
+        message:"What school is itern from?",
+        name: "school"
+    }
+];
+
+
+
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
