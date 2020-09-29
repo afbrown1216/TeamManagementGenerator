@@ -14,7 +14,7 @@ const team = [];
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
-
+console.log("Build your team")
 firstQuestion = [{
     type:"list",
     message:"What team member would you like to add?",
@@ -114,11 +114,11 @@ internQuestions = [
 ];
 
 function startTeamProfile (){
-    console.log("Build your team")
+    
     inquirer
 .prompt(firstQuestion)
 .then(function(res){
-    console.log(res)
+    // console.log("Manager")
     if(res.teamMember === "Manager" ){
        createManagerProfile();
     } else if (res.teamMember === "Engineer"){
@@ -143,6 +143,7 @@ function makeTeam (){
 var manCount = 0;
 function createManagerProfile(){
     if(manCount === 0 ){
+        console.log("Manager")
         inquirer.prompt(managerQuestions).then(function (res){
             let bob = new Manager(res.name, res.id, res.email, res.officeNumber)
             //  console.log(bob);
@@ -163,6 +164,7 @@ function createManagerProfile(){
 }
 
 function createEngineerProfile(){
+    console.log("Engineer")
     inquirer.prompt(engineerQuestions).then(function (res){
         let john = new Engineer(res.name, res.id, res.email, res.github)
             // console.log(john);
@@ -177,6 +179,7 @@ function createEngineerProfile(){
 }
 
 function createInternProfile(){
+    console.log("Intern");
     inquirer.prompt(internQuestions).then(function (res){
         let jan = new Intern(res.name, res.id, res.email, res.school)
             // console.log(jan);
