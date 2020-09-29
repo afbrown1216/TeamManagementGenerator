@@ -119,21 +119,24 @@ function startProfile (){
     console.log(res)
     if(res.teamMember === "Manager"){
         inquirer.prompt(managerQuestions).then(function (res){
-            Bob = new Manager(res.name, res.id, res.email, res.officeNumber)
-            console.log(Bob);
+           let bob = new Manager(res.name, res.id, res.email, res.officeNumber)
+            console.log(bob);
              
         }).catch((err)=> {
             console.log(err)
         })  
     } else if (res.teamMember === "Engineer"){
         inquirer.prompt(engineerQuestions).then(function (res){
-            return new Engineer(res.name, res.id, res.email, res.github)
+            let john = new Engineer(res.name, res.id, res.email, res.github)
+                console.log(john);
+            
         }).catch((err)=> {
             console.log(err)
         }) 
     } else if (res.teamMember === "Intern"){
         inquirer.prompt(internQuestions).then(function (res){
-            return new Intern(res.name, res.id, res.email, res.school)
+            let jan = new Intern(res.name, res.id, res.email, res.school)
+                console.log(jan);
         }).catch((err)=> {
             console.log(err)
         }) 
