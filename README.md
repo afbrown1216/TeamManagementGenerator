@@ -4,7 +4,7 @@
 
 ## Description 
 
-A node CLI application that takes in user input to dynamically generate an employee summary html page. 
+A node CLI application that takes in user input to dynamically generate an employee summary html page. Check it out here [here]( https://afbrown1216.github.io/TeamManagementGenerator/)
 
 ## Installation 
 
